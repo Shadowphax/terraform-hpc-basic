@@ -18,7 +18,7 @@ unzip <filename_which_you_downloaded>
 ## Usage
 
 ```bash
-git clone https://github.com/Shadowphax/user-enviro.git
+git clone https://github.com/Shadowphax/terraform-hpc-basic.git
 terraform plan -out plan.out
 terraform apply plan.out
 ```
