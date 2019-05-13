@@ -1,0 +1,3 @@
+openrc
+.terraform
+terraform.tfstate*
