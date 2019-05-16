@@ -38,7 +38,6 @@ resource "openstack_networking_secgroup_rule_v2" "icmp" {
   security_group_id = "${openstack_networking_secgroup_v2.infra_sec_group.id}"
 }
 
-
 ## Networking Section ##
 
 resource "openstack_networking_network_v2" "private_net" {
@@ -66,12 +65,12 @@ resource "openstack_networking_router_interface_v2" "private_router_port" {
 }
 
 
-## Define Floating IP Pool 
+## Define Floating IP Pool ##
 resource "openstack_networking_floatingip_v2" "floating_ip" {
   pool = "${var.pool}"
 }
 
-# Compute Instance - Slurm Headnode 
+## Compute Instance - Slurm Headnode ##
 resource "openstack_compute_instance_v2" "headnode" {
   name            = "Slurm-Headnode"
   image_name      = "${var.image}"
@@ -92,7 +91,7 @@ resource "openstack_compute_instance_v2" "headnode" {
   }
 }
 
-# Slurm Worker Nodes 
+## Slurm Worker Nodes ##
 resource "openstack_compute_instance_v2" "workers" {
   name		  = "WorkerNodes-${count.index +1}"
   count           = "${var.worker_instance_count}" 
@@ -105,7 +104,7 @@ resource "openstack_compute_instance_v2" "workers" {
   }
 }
 
-# Slurm Controller Node 
+## Slurm Controller Node ##
 resource "openstack_compute_instance_v2" "slurm_controller" {
   name            = "Slurm-Controller"
   image_name      = "${var.image}"
