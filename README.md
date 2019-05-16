@@ -1,4 +1,4 @@
-# Dynamic IAAS Research User Environments with Terraform.io on Openstack
+# Basic deployment of a SLURM HPC on OpenStack using Terraform 
 
 This repository is meant to provide an environment with which researchers can conduct the following work:
 * Instantiate a set of compute nodes running SLURM
