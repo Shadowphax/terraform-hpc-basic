@@ -2,7 +2,6 @@
 
 This repository is meant to provide an environment with which researchers can conduct the following work:
 * Instantiate a set of compute nodes running SLURM
-* Instantiate a set of storage nodes for scratch storage with BeeGFS
 * Jupyter Hub and associated spawners to execute jobs on SLURM
 
 
