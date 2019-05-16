@@ -1,5 +1,5 @@
 variable "image" {
-  default = "Ubuntu-Xenial-16.04"
+  default = "Bionic-Server-Ubuntu-18.04"
 }
 
 variable "flavor" {
@@ -19,6 +19,6 @@ variable "pool" {
 }
 
 variable "worker_instance_count" {
-  default = "6"
+  default = "4"
 }
 
