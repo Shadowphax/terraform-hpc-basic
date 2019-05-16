@@ -64,8 +64,9 @@ resource "openstack_networking_floatingip_v2" "floating_ip" {
   pool = "${var.pool}"
 }
 
+# Slurm Headnode 
 resource "openstack_compute_instance_v2" "headnode" {
-  name            = "headnode"
+  name            = "Slurm-Headnode"
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
@@ -76,7 +77,7 @@ resource "openstack_compute_instance_v2" "headnode" {
   }
 }
 
-# Worker Nodes 
+# Slurm Worker Nodes 
 resource "openstack_compute_instance_v2" "workers" {
   name		  = "WorkerNodes-${count.index +1}"
   count           = "${var.worker_instance_count}" 
@@ -84,6 +85,19 @@ resource "openstack_compute_instance_v2" "workers" {
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
   security_groups = ["${openstack_networking_secgroup_v2.infra_sec_group.name}"]
+  network {
+    uuid = "${openstack_networking_network_v2.private_net.id}"
+  }
+}
+
+# Slurm Controller Node 
+resource "openstack_compute_instance_v2" "slurm_controller" {
+  name            = "Slurm-Controller"
+  image_name      = "${var.image}"
+  flavor_name     = "${var.flavor}"
+  key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
+  security_groups = ["${openstack_networking_secgroup_v2.infra_sec_group.name}"]
+
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
   }
