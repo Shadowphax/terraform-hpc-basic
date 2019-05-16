@@ -1,3 +1,4 @@
 openrc
 .terraform
 terraform.tfstate*
+*.out
