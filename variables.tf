@@ -19,6 +19,6 @@ variable "pool" {
 }
 
 variable "worker_instance_count" {
-  default = "4"
+  default = "2"
 }
 
