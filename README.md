@@ -4,8 +4,6 @@ This repository is meant to provide an environment with which researchers can co
 * Instantiate a set of compute nodes running SLURM
 * Jupyter Hub and associated spawners to execute jobs on SLURM
 
-
-
 ## Installation
 
 Download the Terraform compress file from [Terraform.io](https://terraform.io) to create the environment.
@@ -14,11 +12,16 @@ Download the Terraform compress file from [Terraform.io](https://terraform.io) t
 unzip <filename_which_you_downloaded>
 ```
 
+## Infrastructure deployed 
+ - Slurm Controller
+ - Slurm Headnode 
+ - Worker Nodes ( The count variable defined in variables.tf)
+
 ## Usage
 
 ```bash
 git clone https://github.com/Shadowphax/terraform-hpc-basic.git
-terraform init ( Download the latest plugin for Openstack Support) 
+terraform init ( Download the latest plugin for Openstack Support)
 terraform plan -out plan.out
 terraform apply plan.out
 ```
@@ -30,4 +33,5 @@ Source credentials from your RC file downloadable from within OpenStack Dashboar
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
+
 [Apache 2.0](http://www.apache.org/licenses/)
