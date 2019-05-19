@@ -3,7 +3,7 @@ resource "openstack_compute_keypair_v2" "authkeys" {
   public_key = "${file("${var.ssh_key_file}.pub")}"
 }
 
-# Security Groups 
+## Security Groups ##
 
 resource "openstack_networking_secgroup_v2" "infra_sec_group" {
   name        = "infra_sec_group"
