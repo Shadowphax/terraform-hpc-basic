@@ -64,7 +64,6 @@ resource "openstack_networking_router_interface_v2" "private_router_port" {
   subnet_id = "${openstack_networking_subnet_v2.private_subnet.id}"
 }
 
-
 ## Define Floating IP Pool ##
 resource "openstack_networking_floatingip_v2" "floating_ip" {
   pool = "${var.pool}"
@@ -124,8 +123,6 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
     uuid = "${openstack_networking_network_v2.private_net.id}"
   }
 }
-
-
 
 resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
   floating_ip = "${openstack_networking_floatingip_v2.floating_ip.address}"
