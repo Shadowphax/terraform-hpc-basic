@@ -1,0 +1,26 @@
+---
+- name: install head node packages
+  apt:
+    update_cache: yes
+    name:
+      - git
+      - python-dev
+      - python-pip
+      - python-virtualenv
+      - libevent-dev
+      - python-libvirt
+      - beanstalkd
+      - libssl-dev
+      - libev-dev
+      - libvirt-dev
+      - libmysqlclient-dev
+      - libffi-dev
+      - libyaml-dev
+    state: present
+
+- name: disable ssh host key checking
+  lineinfile:
+    path: /etc/ssh/ssh_config
+    line: "    StrictHostKeyChecking no"
+    regexp: "StrictHostKeyChecking"
+    state: present
