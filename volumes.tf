@@ -5,6 +5,7 @@ resource "openstack_blockstorage_volume_v3" "slurm_boot" {
   description = "Slurm Headnode Boot Volume"
   size        = 5
   image_id    = "${var.image}"
+
 }
 
 
