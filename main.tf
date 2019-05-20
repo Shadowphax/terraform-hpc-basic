@@ -129,16 +129,20 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
   instance_id = "${openstack_compute_instance_v2.headnode.id}"
 
   provisioner "remote-exec" {
-    connection {
-      host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
-      user        = "${var.ssh_user_name}"
-      private_key = "${file(var.ssh_key_file)}"
-    }
-
-    inline = [
+      inline = [
+      "echo 'Beginning the provisioner exec....'",
       "sudo apt-get -y update",
       "sudo apt-get -y install nginx",
       "sudo service nginx start",
+      "sudo apt-get -y install ansible",
     ]
+      connection {
+       host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
+       user        = "${var.ssh_user_name}"
+       private_key = "${file(var.ssh_key_file)}"
+   } 
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${openstack_compute_instance_v2.headnode.network.fixed_ip_v4} ansible/headnode.yml"
+      }
   }
-}
+}  
