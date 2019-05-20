@@ -13,7 +13,6 @@
       - libssl-dev
       - libev-dev
       - libvirt-dev
-      - libmysqlclient-dev
       - libffi-dev
       - libyaml-dev
     state: present
