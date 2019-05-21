@@ -140,9 +140,9 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
        host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
        user        = "${var.ssh_user_name}"
        private_key = "${file(var.ssh_key_file)}"
-   } 
+   }
+  } 
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${openstack_compute_instance_v2.headnode.network.fixed_ip_v4} ansible/headnode.yml"
+    command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.network.fixed_ip_v4}'' ansible/headnode.yml"
       }
-  }
-}  
+}
