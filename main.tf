@@ -132,7 +132,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
       inline = [
       "echo 'Beginning the provisioner exec....'",
       "sudo apt-get -y update",
-      "sudo apt-get -y install python3-pip",
+      "sudo apt-get -y install python3-pip wget unzip",
       "sudo pip3 install ansible",
     ]
       connection {
@@ -142,6 +142,6 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
    }
   } 
   provisioner "local-exec" {
-    command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.access_ip_v4}' ansible/headnode.yml"
+    command = "ansible-playbook -i inventory/slurm-host ansible/headnode.yml"
       }
 }
