@@ -82,7 +82,7 @@ resource "openstack_compute_instance_v2" "headnode" {
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"
-    delete_on_termination = true
+    delete_on_termination = false
   }
 
   network {
@@ -141,7 +141,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
        private_key = "${file(var.ssh_key_file)}"
    }
   } 
-  #provisioner "local-exec" {
-  #  command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.fixed_ip_v4}' ansible/headnode.yml"
-  #    }
+  provisioner "local-exec" {
+    command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.access_ip_v4}' ansible/headnode.yml"
+      }
 }
