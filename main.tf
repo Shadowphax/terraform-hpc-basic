@@ -132,7 +132,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
       inline = [
       "echo 'Beginning the provisioner exec....'",
       "sudo apt-get -y update",
-      "sudo apt-get -y python3-pip",
+      "sudo apt-get -y install python3-pip",
       "sudo pip3 install ansible",
     ]
       connection {
