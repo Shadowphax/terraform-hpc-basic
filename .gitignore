@@ -2,5 +2,5 @@ openrc
 .terraform
 terraform.tfstate*
 *.out
-plan
 inventory/*
+*.retry
