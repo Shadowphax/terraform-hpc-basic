@@ -1,5 +1,5 @@
 variable "image" {
-  default = "Ubuntu-Bionic-18.04"
+  default = "Bionic-Server-Cloud"
 }
 
 variable "flavor" {
