@@ -71,7 +71,7 @@ resource "openstack_networking_floatingip_v2" "floating_ip" {
 
 ## Compute Instance - Slurm Headnode ##
 resource "openstack_compute_instance_v2" "headnode" {
-  name            = "Slurm-Headnode"
+  name            = "headnode"
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
@@ -92,7 +92,7 @@ resource "openstack_compute_instance_v2" "headnode" {
 
 ## Slurm Worker Nodes ##
 resource "openstack_compute_instance_v2" "workers" {
-  name		  = "WorkerNodes-${count.index +1}"
+  name		  = "workernode-${count.index +1}"
   count           = "${var.worker_instance_count}" 
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
@@ -105,7 +105,7 @@ resource "openstack_compute_instance_v2" "workers" {
 
 ## Slurm Controller Node ##
 resource "openstack_compute_instance_v2" "slurm_controller" {
-  name            = "Slurm-Controller"
+  name            = "controller"
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
