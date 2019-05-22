@@ -8,8 +8,18 @@ data  "template_file" "slurm" {
         headnodeip = "${openstack_compute_instance_v2.slurm_headnode.access_ip_v4}"
     }
 }
-
+data  "template_file" "gatewayd" {
+    template = "${file("./templates/gatewayd.tpl")}"
+    vars {
+        username = "${openstack_compute_instance_v2.slurm_headnode.name}"
+        gatewayd_floatingIP = "${openstack_networking_floatingip_v2.floating_ip.address}"
+    }
+}
 resource "local_file" "slurm_file" {
   content  = "${data.template_file.slurm.rendered}"
   filename = "./inventory/slurm-inventory"
+}
+resource "local_file" "gatewayd_file" {
+  content  = "${data.template_file.gatewayd.rendered}"
+  filename = "./inventory/gatewayd.yml"
 }
