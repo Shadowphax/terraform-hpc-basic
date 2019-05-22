@@ -3,3 +3,4 @@ openrc
 terraform.tfstate*
 *.out
 plan
+inventory/slurm-host
