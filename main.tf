@@ -3,7 +3,7 @@ resource "openstack_compute_keypair_v2" "authkeys" {
   public_key = "${file("${var.ssh_key_file}.pub")}"
 }
 
-## Security Groups ##
+// Security Groups 
 
 resource "openstack_networking_secgroup_v2" "infra_sec_group" {
   name        = "infra_sec_group"
@@ -38,7 +38,7 @@ resource "openstack_networking_secgroup_rule_v2" "icmp" {
   security_group_id = "${openstack_networking_secgroup_v2.infra_sec_group.id}"
 }
 
-## Networking Section ##
+//Networking Section 
 
 resource "openstack_networking_network_v2" "private_net" {
   name           = "private_net"
@@ -64,13 +64,14 @@ resource "openstack_networking_router_interface_v2" "private_router_port" {
   subnet_id = "${openstack_networking_subnet_v2.private_subnet.id}"
 }
 
-## Define Floating IP Pool ##
+// Define Floating IP Pool 
 resource "openstack_networking_floatingip_v2" "floating_ip" {
   pool = "${var.pool}"
 }
 
-## Compute Instance - Slurm Headnode ##
-resource "openstack_compute_instance_v2" "headnode" {
+// Compute Instances 
+// Slurm Headnode 
+resource "openstack_compute_instance_v2" "slurm_headnode" {
   name            = "headnode"
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
@@ -90,8 +91,8 @@ resource "openstack_compute_instance_v2" "headnode" {
       }
 }
 
-## Slurm Worker Nodes ##
-resource "openstack_compute_instance_v2" "workers" {
+// Slurm Worker Nodes 
+resource "openstack_compute_instance_v2" "slurm_workers" {
   name		  = "workernode-${count.index +1}"
   count           = "${var.worker_instance_count}" 
   image_name      = "${var.image}"
@@ -103,7 +104,7 @@ resource "openstack_compute_instance_v2" "workers" {
   }
 }
 
-## Slurm Controller Node ##
+// Slurm Controller Node
 resource "openstack_compute_instance_v2" "slurm_controller" {
   name            = "controller"
   image_name      = "${var.image}"
@@ -126,7 +127,7 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
 
 resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
   floating_ip = "${openstack_networking_floatingip_v2.floating_ip.address}"
-  instance_id = "${openstack_compute_instance_v2.headnode.id}"
+  instance_id = "${openstack_compute_instance_v2.slurm_headnode.id}"
 
   provisioner "remote-exec" {
       inline = [
