@@ -4,7 +4,8 @@
 data  "template_file" "slurm" {
     template = "${file("./templates/slurm.tpl")}"
     vars {
-        headnodename = "${openstack_compute_instance_v2.headnode.name}"
+        headnodename = "${openstack_compute_instance_v2.slurm_headnode.name}"
+        headnodeip = "${openstack_compute_instance_v2.slurm_headnode.access_ip_v4}"
     }
 }
 
