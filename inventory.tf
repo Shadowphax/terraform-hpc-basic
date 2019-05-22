@@ -11,5 +11,5 @@ data  "template_file" "slurm" {
 
 resource "local_file" "slurm_file" {
   content  = "${data.template_file.slurm.rendered}"
-  filename = "./inventory/slurm-host"
+  filename = "./inventory/slurm-inventory"
 }
