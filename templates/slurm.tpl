@@ -1,3 +1,6 @@
-//Ansible Inventory Template
 [headnode]
-${headnodename}
+${headnodename} ansible_host=${headnodeip}
+
+[workers]
+
+[controller]
