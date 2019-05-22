@@ -11,7 +11,7 @@ data  "template_file" "slurm" {
 data  "template_file" "gatewayd" {
     template = "${file("./templates/gatewayd.tpl")}"
     vars {
-        username = "${openstack_compute_instance_v2.slurm_headnode.name}"
+        username = "${var.ssh_user_name}"
         gatewayd_floatingIP = "${openstack_networking_floatingip_v2.floating_ip.address}"
     }
 }
