@@ -1,5 +1,5 @@
-# Obtain data from terraform data provider and push to a template file 
-# which closely represents an ansible inventory file. 
+//Obtain data from terraform data provider and push to a template file 
+//which closely represents an ansible inventory file. 
 
 data  "template_file" "slurm" {
     template = "${file("./templates/slurm.tpl")}"
