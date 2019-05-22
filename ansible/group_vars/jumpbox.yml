@@ -1,0 +1,1 @@
+ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ubuntu@154.114.16.113"'
