@@ -87,7 +87,7 @@ resource "openstack_compute_instance_v2" "headnode" {
 
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
-  }
+      }
 }
 
 ## Slurm Worker Nodes ##
@@ -132,9 +132,8 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
       inline = [
       "echo 'Beginning the provisioner exec....'",
       "sudo apt-get -y update",
-      "sudo apt-get -y install nginx",
-      "sudo service nginx start",
-      "sudo apt-get -y install ansible",
+      "sudo apt-get -y python3-pip",
+      "sudo pip3 install ansible",
     ]
       connection {
        host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
@@ -142,7 +141,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
        private_key = "${file(var.ssh_key_file)}"
    }
   } 
-  provisioner "local-exec" {
-    command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.network.fixed_ip_v4}'' ansible/headnode.yml"
-      }
+  #provisioner "local-exec" {
+  #  command = "ansible-playbook -i '${openstack_compute_instance_v2.headnode.fixed_ip_v4}' ansible/headnode.yml"
+  #    }
 }
