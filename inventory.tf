@@ -21,5 +21,5 @@ resource "local_file" "slurm_file" {
 }
 resource "local_file" "gatewayd_file" {
   content  = "${data.template_file.gatewayd.rendered}"
-  filename = "./inventory/gatewayd.yml"
+  filename = "./ansible/group_vars/gatewayd.yml"
 }
