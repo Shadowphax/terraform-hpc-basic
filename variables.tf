@@ -1,5 +1,5 @@
 variable "image" {
-  default = "Bionic-Server-Cloud"
+  default = "Xenial-Server-Cloud"
 }
 
 variable "flavor" {

@@ -1,9 +1,8 @@
-[headnode]
-${headnodename}
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -q ${username}@${jumpbox_floatingIP}"'
 
-[controller]
-${controllerip} ansible_ssh_user=${username} ansible_become=True
+[headnode-frontend]
+${headnodename} ansible_host=${headnodeip} ansible_user=${username}
 
-[jumpbox]
-${controllername} ansible_host=${controllerip}
-${headnodename} ansible_host=${headnodeip}
+[controller-middleware]
+${controllername} ansible_host=${controllerip} ansible_user=${username}
