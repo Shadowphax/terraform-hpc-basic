@@ -3,4 +3,4 @@
 - hosts: workernode
   gather_facts: true
   roles:
-    - workernode
+    - workers
