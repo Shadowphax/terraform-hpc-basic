@@ -119,6 +119,10 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
     destination_type      = "volume"
     delete_on_termination = false
   }
+  
+  provisioner "local-exec" {
+    command = "ansible-playbook -vvvv -i inventory/slurm-inventory ansible/controller.yml"
+      }
 
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
@@ -141,8 +145,5 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
        user        = "${var.ssh_user_name}"
        private_key = "${file(var.ssh_key_file)}"
    }
-  } 
-  provisioner "local-exec" {
-    command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml"
-      }
+  }
 }
