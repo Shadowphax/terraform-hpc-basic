@@ -68,6 +68,23 @@ resource "openstack_networking_router_interface_v2" "private_router_port" {
 resource "openstack_networking_floatingip_v2" "floating_ip" {
   pool = "${var.pool}"
 }
+resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.floating_ip.address}"
+  instance_id = "${openstack_compute_instance_v2.slurm_headnode.id}"
+  provisioner "remote-exec" {
+      inline = [
+      "echo 'Beginning the provisioner exec....'",
+      "sudo apt-get -y update",
+      "sudo apt-get -y install python3-pip wget unzip",
+      "sudo pip3 install ansible",
+    ]
+      connection {
+       host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
+       user        = "${var.ssh_user_name}"
+       private_key = "${file(var.ssh_key_file)}"
+    }
+  }
+}
 
 // Compute Instances 
 // Slurm Headnode 
@@ -88,6 +105,10 @@ resource "openstack_compute_instance_v2" "slurm_headnode" {
 
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
+      }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -vvvv -i inventory/slurm-inventory ansible/controller.yml"
       }
 }
 
@@ -111,7 +132,7 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
   security_groups = ["${openstack_networking_secgroup_v2.infra_sec_group.name}"]
-
+  
   block_device {
     uuid                  = "${openstack_blockstorage_volume_v3.slurm_ctl_boot.id}"
     source_type           = "volume"
@@ -119,31 +140,7 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
     destination_type      = "volume"
     delete_on_termination = false
   }
-  
-  provisioner "local-exec" {
-    command = "ansible-playbook -vvvv -i inventory/slurm-inventory ansible/controller.yml"
-      }
-
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
-  }
-}
-
-resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
-  floating_ip = "${openstack_networking_floatingip_v2.floating_ip.address}"
-  instance_id = "${openstack_compute_instance_v2.slurm_headnode.id}"
-
-  provisioner "remote-exec" {
-      inline = [
-      "echo 'Beginning the provisioner exec....'",
-      "sudo apt-get -y update",
-      "sudo apt-get -y install python3-pip wget unzip",
-      "sudo pip3 install ansible",
-    ]
-      connection {
-       host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
-       user        = "${var.ssh_user_name}"
-       private_key = "${file(var.ssh_key_file)}"
-   }
   }
 }
