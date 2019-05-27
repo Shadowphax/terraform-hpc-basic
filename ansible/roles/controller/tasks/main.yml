@@ -5,17 +5,6 @@
     update_cache: yes
     name:
       - git
-      - python-dev
-      - python-pip
-      - python-virtualenv
-      - libevent-dev
-      - python-libvirt
-      - beanstalkd
-      - libssl-dev
-      - libev-dev
-      - libvirt-dev
-      - libffi-dev
-      - libyaml-dev
     state: present
 
 - name: disable ssh host key checking
