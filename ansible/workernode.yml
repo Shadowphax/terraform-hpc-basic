@@ -1,0 +1,4 @@
+ gather_facts: true
+  hosts: workernode
+  roles: 
+    - workernode

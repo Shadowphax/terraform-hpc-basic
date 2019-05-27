@@ -1,4 +1,4 @@
-# Basic deployment of a SLURM HPC on OpenStack using Terraform 
+# Basic deployment of a SLURM HPC on OpenStack using Terraform
 
 This repository is meant to provide an environment with which researchers can conduct the following work:
 * Instantiate a set of compute nodes running SLURM
@@ -12,7 +12,7 @@ Download the Terraform compress file from [Terraform.io](https://terraform.io) t
 unzip <filename_which_you_downloaded>
 ```
 
-## Infrastructure deployed 
+## Infrastructure Deployed
  - Slurm Controller
  - Slurm Headnode 
  - Worker Nodes ( The count variable defined in variables.tf)
