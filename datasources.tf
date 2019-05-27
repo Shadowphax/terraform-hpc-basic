@@ -16,21 +16,7 @@ data  "template_file" "slurm" {
         username = "${var.ssh_user_name}"
     }
 }
-
-data  "template_file" "jumpbox" {
-    template = "${file("./templates/jumpbox.tpl")}"
-    vars {
-        username = "${var.ssh_user_name}"
-        jumpbox_floatingIP = "${openstack_networking_floatingip_v2.floating_ip.address}"
-    }
-}
-
 resource "local_file" "slurm_file" {
   content  = "${data.template_file.slurm.rendered}"
   filename = "./inventory/slurm-inventory"
 }
-
-#resource "local_file" "jumpbox_file" {
-#  content  = "${data.template_file.jumpbox.rendered}"
-#  filename = "./ansible/group_vars/jumpbox.yml"
-#}
