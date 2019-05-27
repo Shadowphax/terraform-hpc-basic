@@ -142,7 +142,7 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
 }
 
 // Local Provisioner 
-resource "null_resource" "ansible-deploy" {
+resource "null_resource" "controller-ansible-deploy" {
   provisioner "local-exec" {
     command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml --become"
   }
