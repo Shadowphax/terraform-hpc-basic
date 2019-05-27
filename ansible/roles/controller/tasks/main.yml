@@ -3,7 +3,6 @@
 - name: install controller packages
   apt:
     update_cache: yes
-    become: true
     name:
       - git
       - lolcat
