@@ -6,11 +6,12 @@
     become: true
     name:
       - git
+      - lolcat
     state: present
 
 - name: disable ssh host key checking
   lineinfile:
     path: /etc/ssh/ssh_config
-    line: "    StrictHostKeyChecking no"
+    line: "StrictHostKeyChecking no"
     regexp: "StrictHostKeyChecking"
     state: present
