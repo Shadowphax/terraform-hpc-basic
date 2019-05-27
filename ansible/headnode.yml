@@ -1,4 +1,7 @@
- gather_facts: true
-  hosts: headnode
-  roles: 
+---
+
+- hosts: headnode
+  gather_facts: true
+  become: yes
+  roles:
     - headnode

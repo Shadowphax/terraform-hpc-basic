@@ -1,4 +1,7 @@
- gather_facts: true
-  hosts: controller
-  roles: 
+---
+
+- hosts: controller
+  gather_facts: true
+  become: yes
+  roles:
     - controller
