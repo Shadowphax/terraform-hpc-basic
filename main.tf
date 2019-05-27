@@ -76,7 +76,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
       "echo 'Beginning the provisioner exec....'",
       "sudo apt-get -y update",
       "sudo apt-get -y install python3-pip wget unzip",
-      "sudo pip3 install ansible",
+      "sudo pip3 -q install ansible",
     ]
       connection {
        host        = "${openstack_networking_floatingip_v2.floating_ip.address}"
@@ -105,10 +105,6 @@ resource "openstack_compute_instance_v2" "slurm_headnode" {
 
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
-      }
-
-  provisioner "local-exec" {
-    command = "ansible-playbook -vvvv -i inventory/slurm-inventory ansible/controller.yml"
       }
 }
 
@@ -143,4 +139,12 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
   }
+}
+
+// Local Provisioner 
+resource "null_resource" "ansible-deploy" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml --become"
+  }
+  depends_on = ["openstack_compute_floatingip_associate_v2.headnode_floating_ip"]
 }
