@@ -1,9 +1,9 @@
 variable "image" {
-  default = "Bionic-Server-Cloud"
+  default = "Ubuntu-Bionic-18.04-amd64"
 }
 
 variable "flavor" {
-  default = "m1.medium"
+  default = "ilifu-B"
 }
 
 variable "ssh_key_file" {
@@ -15,7 +15,7 @@ variable "ssh_user_name" {
 }
 
 variable "pool" {
-  default = "public1"
+  default = "Ext_Floating_IP"
 }
 
 variable "worker_instance_count" {
