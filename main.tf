@@ -143,6 +143,6 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
    }
   } 
   provisioner "local-exec" {
-    command = "ansible-playbook -vvv -i inventory/slurm-inventory ansible/controller.yml"
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml"
       }
 }
