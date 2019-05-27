@@ -8,4 +8,4 @@ ${headnodename} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${he
 ${controllername} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${controllerip}
 
 [workernodesgroup]
-${workernodes}
+${workernodes} ansible_host=${workernodesip}

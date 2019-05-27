@@ -14,3 +14,15 @@
     line: "StrictHostKeyChecking no"
     regexp: "StrictHostKeyChecking"
     state: present
+
+- name: point DNS at the Headnode
+  lineinfile:
+    path: /etc/systemd/resolved.conf
+    line: "DNS=${headnodeip}"
+    regexp: "DNS="
+    state: present
+
+- name: restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
