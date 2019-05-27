@@ -2,6 +2,5 @@
 
 - hosts: controller
   gather_facts: true
-  become: yes
   roles:
     - controller

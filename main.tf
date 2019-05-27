@@ -110,12 +110,13 @@ resource "openstack_compute_instance_v2" "slurm_headnode" {
 
 // Slurm Worker Nodes 
 resource "openstack_compute_instance_v2" "slurm_workers" {
-  name		  = "workernode-${count.index +1}"
+  name		  = "slurm-wrk-${count.index +1}"
   count           = "${var.worker_instance_count}" 
   image_name      = "${var.image}"
   flavor_name     = "${var.flavor}"
   key_pair        = "${openstack_compute_keypair_v2.authkeys.name}"
   security_groups = ["${openstack_networking_secgroup_v2.infra_sec_group.name}"]
+  
   network {
     uuid = "${openstack_networking_network_v2.private_net.id}"
   }
@@ -141,10 +142,24 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
   }
 }
 
-// Local Provisioner 
+// Local Provisioners
 resource "null_resource" "controller-ansible-deploy" {
   provisioner "local-exec" {
     command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml --become"
+  }
+  depends_on = ["openstack_compute_floatingip_associate_v2.headnode_floating_ip"]
+}
+
+resource "null_resource" "headnode-ansible-deploy" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/headnode.yml --become"
+  }
+  depends_on = ["openstack_compute_floatingip_associate_v2.headnode_floating_ip"]
+}
+
+resource "null_resource" "workernode-ansible-deploy" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/workernode.yml --become"
   }
   depends_on = ["openstack_compute_floatingip_associate_v2.headnode_floating_ip"]
 }

@@ -9,13 +9,6 @@
       - slurmd
     state: present
 
-- name: Remove Controller Packages
-  apt:
-    name:
-      - slurmd
-    state: absent   
-
-
 - name: disable ssh host key checking
   lineinfile:
     path: /etc/ssh/ssh_config
