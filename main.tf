@@ -91,7 +91,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
 // Compute Instances 
 // Slurm Headnode 
 resource "openstack_compute_instance_v2" "slurm_headnode" {
-  name            = "headnode"
+  name            = "slurm-headnode"
   image_name      = var.image
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
@@ -126,7 +126,7 @@ resource "openstack_compute_instance_v2" "slurm_workers" {
 
 // Slurm Controller Node
 resource "openstack_compute_instance_v2" "slurm_controller" {
-  name            = "controller"
+  name            = "slurm-controller"
   image_name      = var.image
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
