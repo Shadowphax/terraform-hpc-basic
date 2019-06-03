@@ -1,11 +1,11 @@
 [all:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -q ${username}@${jumpbox_floatingIP}"'
 
-[headnodefrontend]
+[headnode]
 ${headnodename} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${headnodeip} 
 
-[controllermiddleware]
+[controller]
 ${controllername} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${controllerip}
 
-[workernodesgroup]
+[workernodes]
 ${workernodes} ansible_host=${workernodesip}
