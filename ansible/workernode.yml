@@ -1,6 +1,6 @@
 ---
 
-- hosts: workernodesgroup
+- hosts: workernodes
   gather_facts: true
   roles:
     - workers
