@@ -19,7 +19,7 @@
 - name: point DNS at the Headnode
   lineinfile:
     path: /etc/systemd/resolved.conf
-    line: "DNS=${headnodeip}"
+    line: "DNS={{ hostvars['headnode']['ansible_default_ipv4.address'] }}"   
     regexp: "DNS="
     state: present
 
