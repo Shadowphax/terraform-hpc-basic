@@ -15,15 +15,3 @@
     line: "StrictHostKeyChecking no"
     regexp: "StrictHostKeyChecking"
     state: present
-
-- name: point DNS at the Headnode
-  lineinfile:
-    path: /etc/systemd/resolved.conf
-    line: "DNS={{ hostvars['headnode']['ansible_default_ipv4.address'] }}"   
-    regexp: "DNS="
-    state: present
-
-- name: restart systemd-resolved
-  systemd:
-    name: systemd-resolved
-    state: restarted
