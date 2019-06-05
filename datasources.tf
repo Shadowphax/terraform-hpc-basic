@@ -49,3 +49,22 @@ resource "local_file" "dnsmasq_hosts" {
   filename = "./inventory/hosts"
 }
 
+/*
+Terraform creating groupvars/all.yml for Ansible 
+*/
+data "template_file" "groupvars" {
+  template = file("./templates/all.yml.tpl")
+  vars = {
+    headnodename   = openstack_compute_instance_v2.slurm_headnode.name
+    headnodeip     = openstack_compute_instance_v2.slurm_headnode.access_ip_v4
+    controllername = openstack_compute_instance_v2.slurm_controller.name
+    controllerip   = openstack_compute_instance_v2.slurm_controller.access_ip_v4
+    workernodes    = join("\n", openstack_compute_instance_v2.slurm_workers.*.name)
+    workernodesip = join(
+      "\n",
+      openstack_compute_instance_v2.slurm_workers.*.access_ip_v4,
+    )
+    jumpbox_floatingIP = openstack_networking_floatingip_v2.floating_ip.address
+    username           = var.ssh_user_name
+  }
+}
