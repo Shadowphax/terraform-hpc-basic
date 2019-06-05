@@ -3,4 +3,3 @@
 - hosts: headnode
   roles:
     - headnode
-    - dnsmasq
