@@ -22,7 +22,7 @@ unzip <filename_which_you_downloaded>
 ```bash
 git clone https://github.com/Shadowphax/terraform-hpc-basic.git
 terraform workspace new slurm ( The identifier "slurm" can be anything. The terraform state file will reside in this location ) 
-terraform init ( Download the latest plugin for Openstack Support )
+terraform init ( Installs new)
 terraform plan -out plan.out
 terraform apply plan.out
 ```
