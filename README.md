@@ -19,12 +19,19 @@ unzip <filename_which_you_downloaded>
 
 ## Usage
 
-```bash
-git clone https://github.com/Shadowphax/terraform-hpc-basic.git
-terraform workspace new slurm ( The identifier "slurm" can be anything. The terraform state file will reside in this location ) 
-terraform init ( Installs new)
-terraform plan -out plan.out
-terraform apply plan.out
+`
+git clone https://github.com/Shadowphax/terraform-hpc-basic.git `
+
+Create a new workspace for Terraform to create and managed it's state. </br>
+`terraform workspace new slurm`</br>
+
+Download the relevant Terraform plugins and  template engines. </br>
+`terraform init`</br>
+
+Execute the `plan` to verify the creation of infrastructure. </br>
+`terraform plan -out plan.out`</br>
+Tim </br>
+`terraform apply plan.out`</br>
 ```
 
 ## Openstack Credentials
