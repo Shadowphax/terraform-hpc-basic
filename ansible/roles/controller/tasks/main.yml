@@ -6,7 +6,6 @@
     name:
       - git
       - lolcat
-      - slurmd
     state: present
 
 - name: disable ssh host key checking
