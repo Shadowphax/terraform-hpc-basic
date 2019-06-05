@@ -1,4 +1,12 @@
 // Local Provisioners
+
+resource "null_resource" "common-deploy" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/common.yml --become"
+  }
+  depends_on = [openstack_compute_floatingip_associate_v2.headnode_floating_ip]
+}
+
 resource "null_resource" "controller-deploy" {
   provisioner "local-exec" {
     command = "ansible-playbook -i inventory/slurm-inventory ansible/controller.yml --become"
