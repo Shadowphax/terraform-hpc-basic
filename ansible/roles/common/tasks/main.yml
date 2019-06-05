@@ -1,2 +1,9 @@
 ---
 # tasks file for common
+- name: Copy file with owner and permissions
+  copy:
+    src: files/hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
