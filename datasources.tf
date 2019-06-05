@@ -28,7 +28,7 @@ resource "local_file" "slurm_file" {
 }
 
 data "template_file" "dns" {
-  template = file("./templates/dnsmasq_hosts.tpl")
+  template = file("./templates/hosts.tpl")
   vars = {
     headnodename   = openstack_compute_instance_v2.slurm_headnode.name
     headnodeip     = openstack_compute_instance_v2.slurm_headnode.access_ip_v4
@@ -44,9 +44,9 @@ data "template_file" "dns" {
   }
 }
 
-resource "local_file" "dnsmasq_hosts" {
+resource "local_file" "hosts" {
   content  = data.template_file.dns.rendered
-  filename = "./inventory/hosts"
+  filename = "./ansible/roles/common/files/hosts"
 }
 
 /*
