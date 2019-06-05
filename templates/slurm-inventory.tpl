@@ -6,3 +6,5 @@ ${headnodename} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${he
 
 [controller]
 ${controllername} ansible_ssh_user=ubuntu ansible_connection=ssh ansible_host=${controllerip}
+
+[workernodes]
