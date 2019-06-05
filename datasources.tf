@@ -27,28 +27,6 @@ resource "local_file" "slurm_file" {
   filename = "./inventory/slurm-inventory"
 }
 
-data "template_file" "dns" {
-  template = file("./templates/hosts.tpl")
-  vars = {
-    headnodename   = openstack_compute_instance_v2.slurm_headnode.name
-    headnodeip     = openstack_compute_instance_v2.slurm_headnode.access_ip_v4
-    controllername = openstack_compute_instance_v2.slurm_controller.name
-    controllerip   = openstack_compute_instance_v2.slurm_controller.access_ip_v4
-    workernodes    = join("\n", openstack_compute_instance_v2.slurm_workers.*.name)
-    workernodesip = join(
-      "\n",
-      openstack_compute_instance_v2.slurm_workers.*.access_ip_v4,
-    )
-    jumpbox_floatingIP = openstack_networking_floatingip_v2.floating_ip.address
-    username           = var.ssh_user_name
-  }
-}
-
-resource "local_file" "hosts" {
-  content  = data.template_file.dns.rendered
-  filename = "./ansible/roles/common/files/hosts"
-}
-
 /*
 Terraform creating groupvars/all.yml for Ansible 
 */
