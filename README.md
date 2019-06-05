@@ -19,20 +19,20 @@ unzip <filename_which_you_downloaded>
 
 ## Usage
 
-`
-git clone https://github.com/Shadowphax/terraform-hpc-basic.git `
+1. Clone the respsitory </br>
+`git clone https://github.com/Shadowphax/terraform-hpc-basic.git `
 
-Create a new workspace for Terraform to create and managed it's state. </br>
+2. Create a new workspace for Terraform to create and managed it's state. </br>
 `terraform workspace new slurm`</br>
 
-Download the relevant Terraform plugins and  template engines. </br>
+3. Download the relevant Terraform plugins and  template engines. </br>
 `terraform init`</br>
 
-Execute the `plan` to verify the creation of infrastructure. </br>
+4. Execute the `plan` to verify the creation of infrastructure. </br>
 `terraform plan -out plan.out`</br>
-Tim </br>
+
+5. Execute the `apply` to update the infrastructure </br>
 `terraform apply plan.out`</br>
-```
 
 ## Openstack Credentials
 Source credentials from your RC file downloadable from within OpenStack Dashboard. 
