@@ -6,7 +6,7 @@ data "openstack_networking_network_v2" "private_net" {
 //which closely represents an ansible inventory file. 
 
 data "template_file" "slurm" {
-  template = file("./templates/slurm.tpl")
+  template = file("./templates/slurm-inventory.tpl")
   vars = {
     headnodename   = openstack_compute_instance_v2.slurm_headnode.name
     headnodeip     = openstack_compute_instance_v2.slurm_headnode.access_ip_v4
