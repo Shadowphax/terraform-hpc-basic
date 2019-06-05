@@ -1,9 +1,12 @@
 ---
 # tasks file for common
-- name: Copy file with owner and permissions
-  copy:
-    src: files/hosts
-    dest: /etc/hosts
-    owner: root
-    group: root
-    mode: '0644'
+
+# Appending hosts to the /etc/hosts file.
+- name: update host file 
+  lineinfile:
+    path: /etc/hosts
+    regexp: '{{ hostvars[item].ansible_default_ipv4.address }}.*{{ item }}$'
+    line: "{{ hostvars[item].ansible_default_ipv4.address }} {{item}}"
+    state: present
+  become: yes
+  with_items: "{{ groups.all }}"
