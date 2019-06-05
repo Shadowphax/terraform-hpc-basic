@@ -68,3 +68,8 @@ data "template_file" "groupvars" {
     username           = var.ssh_user_name
   }
 }
+
+resource "local_file" "groupvars" {
+  content  = data.template_file.groupvars.rendered
+  filename = "./ansible/group_vars/all.yml"
+}
