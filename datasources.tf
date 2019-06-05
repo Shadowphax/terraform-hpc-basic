@@ -35,7 +35,7 @@ data "template_file" "groupvars" {
     controllername = openstack_compute_instance_v2.slurm_controller.name
     controllerip   = openstack_compute_instance_v2.slurm_controller.access_ip_v4
     workernodes    = join("\n", openstack_compute_instance_v2.slurm_workers.*.name)
-    workernodesip  = join("\n", openstack_compute_instance_v2.slurm_workers.*.access_ip_v4,)
+    workernodesip  = join("\n", openstack_compute_instance_v2.slurm_workers.*.access_ip_v4)
     jumpbox_floatingIP = openstack_networking_floatingip_v2.floating_ip.address
     username           = var.ssh_user_name
   }
