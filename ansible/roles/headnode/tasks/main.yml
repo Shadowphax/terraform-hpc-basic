@@ -1,5 +1,12 @@
 ---
 # Tasks for Headnode
+- name: disable ssh host key checking
+  lineinfile:
+    path: /etc/ssh/ssh_config
+    line: "StrictHostKeyChecking no"
+    regexp: "StrictHostKeyChecking"
+    state: present
+
 - name: Install Headnode Packages
   apt:
     update_cache: yes
@@ -7,11 +14,4 @@
       - git
       - lolcat
       - slurmd
-    state: present
-
-- name: disable ssh host key checking
-  lineinfile:
-    path: /etc/ssh/ssh_config
-    line: "StrictHostKeyChecking no"
-    regexp: "StrictHostKeyChecking"
     state: present
