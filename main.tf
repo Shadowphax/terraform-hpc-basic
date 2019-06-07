@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12.0"
+}
+
 resource "openstack_compute_keypair_v2" "authkeys" {
   name       = "authkeys"
   public_key = file("${var.ssh_key_file}.pub")
