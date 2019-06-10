@@ -13,7 +13,6 @@ variable "ssh_key_file" {
 variable "ssh_user_name" {
   default = "ubuntu"
 }
-
 variable "pool" {
   default = "Ext_Floating_IP"
 }
@@ -21,4 +20,6 @@ variable "pool" {
 variable "worker_instance_count" {
   default = "2"
 }
+
+
 
