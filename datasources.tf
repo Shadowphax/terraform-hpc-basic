@@ -3,6 +3,10 @@ data "openstack_networking_network_v2" "private_net" {
   name = var.pool
 }
 
+/*
+This datasource is required for the <<resource "local_file" "ansible_inventory>> 
+to populate the Floating IP"
+*/ 
 data "openstack_networking_floatingip_v2" "floating_ip" {
   address = openstack_networking_floatingip_v2.floating_ip.address
 }
