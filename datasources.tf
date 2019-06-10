@@ -3,6 +3,10 @@ data "openstack_networking_network_v2" "private_net" {
   name = var.pool
 }
 
+data "openstack_networking_floatingip_v2" "floating_ip" {
+  address = openstack_networking_floatingip_v2.floating_ip.address
+}
+
 /*
 Terraform creating groupvars/all.yml for Ansible 
 */
@@ -27,28 +31,24 @@ resource "local_file" "groupvars" {
 
 resource "local_file" "ansible_inventory" {
   count = "${length(openstack_compute_instance_v2.slurm_workers.*.name)}"
-  content = "[bastion]\n${join("\n",
-            formatlist(
-              "%s ansible_host=%s",
-              openstack_compute_instance_v2.slurm_headnode.*.name,
-              openstack_networking_floatingip_v2.floating_ip.address
-            ))}\n\n[all:vars]\nansible_user=ubuntu ansible_ssh_common_args='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no\n\n\n[workernodes]\n${join("\n",
+  content = "[all:vars]\nansible_ssh_common_args='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p -q ${var.ssh_user_name}@${data.openstack_networking_floatingip_v2.floating_ip.address}\"'\nansible_user=ubuntu\n\n[workernodes]\n${join("\n",
             formatlist(
               "%s ansible_host=%s",
               openstack_compute_instance_v2.slurm_workers.*.name,
               openstack_compute_instance_v2.slurm_workers.*.access_ip_v4
-            ))}\n\n[workernodes:vars]\nansible_user=ubuntu\n\n\n[headnode]\n${join("\n",
+            )
+            )}\n\n[workernodes:vars]\nansible_user=ubuntu\n\n[headnode]\n${join("\n",
             formatlist(
               "%s ansible_host=%s",
               openstack_compute_instance_v2.slurm_headnode.*.name,
               openstack_compute_instance_v2.slurm_headnode.*.access_ip_v4
             )
-            )}\n\n[headnode:vars]\nansible_user=ubuntu\n\n\n[controller]\n${join("\n",
+            )}\n\n[headnode:vars]\nansible_user=ubuntu\n\n[controller]\n${join("\n",
             formatlist(
               "%s ansible_host=%s",
               openstack_compute_instance_v2.slurm_controller.*.name,
               openstack_compute_instance_v2.slurm_controller.*.access_ip_v4
             )
-            )}\n\n[controller:vars]\nansible_user=ubuntu"
-  filename = "./inventory/slurm_inventory"
+            )}\n\n[controller:vars]\nansible_user=ubuntu"     
+  filename = "./inventory/slurm-inventory"
 }
