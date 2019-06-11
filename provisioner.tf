@@ -1,6 +1,9 @@
 // Local Provisioners
 
 resource "null_resource" "common-deploy" {
+  triggers = {
+    always_run = "${timestamp()}"
+  }
   provisioner "local-exec" {
     command = "ansible-playbook ansible/site.yml --become"
   }
