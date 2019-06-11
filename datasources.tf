@@ -1,4 +1,3 @@
-
 data "openstack_networking_network_v2" "private_net" {
   name = var.pool
 }
@@ -29,7 +28,7 @@ data "template_file" "groupvars" {
   }
 }
 
-// Output of the all.yml 
+/* Output of the all.yml */
 resource "local_file" "groupvars" {
   content  = data.template_file.groupvars.rendered
   filename = "./ansible/group_vars/all.yml"
