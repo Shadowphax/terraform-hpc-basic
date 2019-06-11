@@ -21,9 +21,9 @@ resource "null_resource" "headnode-deploy" {
   depends_on = [openstack_compute_floatingip_associate_v2.headnode_floating_ip]
 }
 
-#resource "null_resource" "workernode-deploy" {
-#  provisioner "local-exec" {
-#    command = "ansible-playbook -i inventory/slurm-inventory ansible/workernode.yml --become"
-#  }
-#  depends_on = [openstack_compute_floatingip_associate_v2.headnode_floating_ip]
-#}
+resource "null_resource" "workernode-deploy" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory/slurm-inventory ansible/workernode.yml --become"
+  }
+  depends_on = [openstack_compute_floatingip_associate_v2.headnode_floating_ip]
+}
