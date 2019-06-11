@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  roles:
+    - common
+    - geerlingguy.ntp
+    
+- hosts: controller
+  roles:
+
+- hosts: headnode
+  roles:
+
+- hosts: workernodes
+  roles:
+    
+    
