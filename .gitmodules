@@ -4,6 +4,3 @@
 [submodule "ansible/galaxy-roles/geerlingguy.nfs"]
 	path = ansible/galaxy-roles/geerlingguy.nfs
 	url = https://github.com/geerlingguy/ansible-role-nfs.git
-[submodule "ansible/galaxy-roles/ansible-filesystem"]
-	path = ansible/galaxy-roles/ansible-filesystem
-	url = https://github.com/entercloudsuite/ansible-filesystem.git
