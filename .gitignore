@@ -2,6 +2,6 @@ openrc
 .terraform
 terraform.tfstate*
 *.out
-inventory/*
+inventory/slurm-inventory
 *.retry
 ansible/group_vars
