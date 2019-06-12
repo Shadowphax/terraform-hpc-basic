@@ -1,6 +1,5 @@
 ---
 # tasks file for common
-
 - name: Update package cache 
   apt: 
     update_cache: yes 
