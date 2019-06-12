@@ -1,4 +1,4 @@
-# Creation Slurm Headnode Boot Volume
+/* Creation Slurm Headnode Boot Volume */
 
 resource "openstack_blockstorage_volume_v3" "slurm_boot" {
   name        = "Slurm_boot"
@@ -8,7 +8,7 @@ resource "openstack_blockstorage_volume_v3" "slurm_boot" {
   enable_online_resize = true
 }
 
-# Create Slurm Controller Boot Volume 
+/* Create Slurm Controller Boot Volume */
 
 resource "openstack_blockstorage_volume_v3" "slurm_ctl_boot" {
   name        = "Slurm_ctl_boot"
@@ -17,3 +17,25 @@ resource "openstack_blockstorage_volume_v3" "slurm_ctl_boot" {
   image_id    = var.image
   enable_online_resize = true
 }
+
+/* Create BeeGFS Volume */
+
+resource "openstack_blockstorage_volume_v3" "beegfs_scratch_1" {
+  name        = "beegfs-scratch-1-vol-${count.index + 1}"
+  count       = var.beegfs_storage_vol_count
+  description = "BeeGFS Scratch Volumes 1"
+  size        = 5
+  image_id    = var.image
+  enable_online_resize = true
+}
+
+resource "openstack_blockstorage_volume_v3" "beegfs_scratch_2" {
+  name        = "beegfs-scratch-2-vol-${count.index + 1}"
+  count       = var.beegfs_storage_vol_count
+  description = "BeeGFS Scratch Volumes 2"
+  size        = 5
+  image_id    = var.image
+  enable_online_resize = true
+}
+
+
