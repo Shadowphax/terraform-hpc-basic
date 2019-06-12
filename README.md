@@ -28,7 +28,7 @@ unzip <filename_which_you_downloaded>
 3. Download the relevant Terraform plugins and  template engines. </br>
 `terraform init`</br>
 
-4. Download the ansible roles.
+4. Download the ansible roles.</br>
 `git submodule update --init --recursive`
 
 5. Execute the `plan` to verify the creation of infrastructure. </br>
@@ -39,7 +39,10 @@ unzip <filename_which_you_downloaded>
 
 ## Adding additional Ansible Roles
 
-I split the location of ansible roles into two sections. The first is a role ```internal-role``` which is relevant internally, example: common and the other which is relevent to external roles - ```galaxy-roles```.The role update path is located in the ansible.cfg.
+I split the location of ansible roles into two locations. The first location is a role path ```internal-role``` which is relevant internally, example: ```common``` plays. The other is relevent to external roles - ```galaxy-roles```.The role update paths are located in the ansible.cfg. </br>
+</br>
+Adding more ansible roles is simply finding the role on git and executing - ```git submodule add <url> <path_to_role_and_module_name>```</br>
+For example: ```git submodule add https://github.com/geerlingguy/ansible-role-nfs.git ansible/galaxy-roles/geerlingguy.nfs``` - it gets added to the .gitmodule file and this file you can check into your own fork of this project. Please do not submit PR's for the addition of roles as this project is meant to be kept miminalistic and simple.
 
 ## Openstack Credentials
 Source credentials from your RC file downloadable from within OpenStack Dashboard. 
