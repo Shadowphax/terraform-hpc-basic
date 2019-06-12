@@ -1,4 +1,4 @@
-// Local Provisioners
+/* Local Provisioners */
 
 resource "null_resource" "common-deploy" {
   triggers = {
