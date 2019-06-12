@@ -17,7 +17,7 @@ unzip <filename_which_you_downloaded>
  - Slurm Headnode 
  - Worker Nodes ( The count variable defined in variables.tf)
 
-## Usage
+## Usage:
 
 1. Clone the respository </br>
 `git clone https://github.com/Shadowphax/terraform-hpc-basic.git `
@@ -36,6 +36,10 @@ unzip <filename_which_you_downloaded>
 
 6. Execute the `apply` to update the infrastructure </br>
 `terraform apply plan.out`</br>
+
+## Adding additional Ansible Roles
+
+I split the location of ansible roles into two sections. The first is a role ```internal-role``` which is relevant internally, example: common and the other which is relevent to external roles - ```galaxy-roles```.The role update path is located in the ansible.cfg.
 
 ## Openstack Credentials
 Source credentials from your RC file downloadable from within OpenStack Dashboard. 
