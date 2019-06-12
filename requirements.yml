@@ -1,0 +1,5 @@
+# Ansible Roles from Galaxy 
+- src: geerlingguy.ntp
+
+# Github Roles 
+- src: https://github.com/stackhpc/ansible-role-beegfs
