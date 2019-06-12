@@ -2,11 +2,11 @@
 
 resource "null_resource" "common-deploy" {
   triggers = {
-    always_run = "${timestamp()}"
+    cluster_instance_names = "${join(",", openstack_compute_instance_v2.slurm_workers.*.name)}"
   }
 
   provisioner "local-exec" {
-    command = "sleep 60 & echo \"Sleeping to wait for servers to settle....!\" "
+    command = "sleep 90 & echo \"Sleeping to wait for servers to settle....!\" "
   }
 
   provisioner "local-exec" {
