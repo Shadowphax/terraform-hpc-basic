@@ -5,6 +5,7 @@ resource "openstack_blockstorage_volume_v3" "slurm_boot" {
   description = "Slurm Headnode Boot Volume"
   size        = 5
   image_id    = var.image
+  enable_online_resize = true
 }
 
 # Creation of volumes for Slurm Controller
@@ -14,5 +15,6 @@ resource "openstack_blockstorage_volume_v3" "slurm_ctl_boot" {
   description = "Slurm Controller Boot Volume"
   size        = 5
   image_id    = var.image
+  enable_online_resize = true
 }
 
