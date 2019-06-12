@@ -1,6 +1,3 @@
-[submodule "ansible/external-roles/geerlingguy.ntp"]
-	path = ansible/external-roles/geerlingguy.ntp
-	url = https://github.com/geerlingguy/ansible-role-ntp.git
 [submodule "ansible/external-roles/ansible-role-beegfs"]
 	path = ansible/external-roles/ansible-role-beegfs
 	url = https://github.com/stackhpc/ansible-role-beegfs.git
