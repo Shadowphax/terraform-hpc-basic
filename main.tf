@@ -148,3 +148,41 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
   }
 }
 
+// Storage Instances 
+// BeeGFS Storage Nodes  
+
+resource "openstack_compute_instance_v2" "beegfs_storage_1" {
+  name            = "bgfs-1"
+  image_name      = var.image
+  flavor_name     = var.flavor
+  key_pair        = openstack_compute_keypair_v2.authkeys.name
+  security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
+
+  network {
+    uuid = openstack_networking_network_v2.private_net.id
+  }
+}
+
+resource "openstack_compute_instance_v2" "beegfs_storage_2" {
+  name            = "bgfs-2"
+  image_name      = var.image
+  flavor_name     = var.flavor
+  key_pair        = openstack_compute_keypair_v2.authkeys.name
+  security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
+
+  network {
+    uuid = openstack_networking_network_v2.private_net.id
+  }
+}
+
+resource "openstack_compute_volume_attach_v2" "beegfs_attachments_1" {
+  count       =  var.beegfs_storage_vol_count
+  instance_id = "${openstack_compute_instance_v2.beegfs_storage_1.id}"
+  volume_id   = "${openstack_blockstorage_volume_v3.beegfs_scratch_1.*.id[count.index]}"
+}
+
+resource "openstack_compute_volume_attach_v2" "beegfs_attachments_2" {
+  count       =  var.beegfs_storage_vol_count
+  instance_id = "${openstack_compute_instance_v2.beegfs_storage_2.id}"
+  volume_id   = "${openstack_blockstorage_volume_v3.beegfs_scratch_2.*.id[count.index]}"
+}
