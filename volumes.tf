@@ -25,7 +25,6 @@ resource "openstack_blockstorage_volume_v3" "beegfs_scratch_1" {
   count       = var.beegfs_storage_vol_count
   description = "BeeGFS Scratch Volumes 1"
   size        = 5
-  image_id    = var.image
   enable_online_resize = true
 }
 
@@ -34,7 +33,6 @@ resource "openstack_blockstorage_volume_v3" "beegfs_scratch_2" {
   count       = var.beegfs_storage_vol_count
   description = "BeeGFS Scratch Volumes 2"
   size        = 5
-  image_id    = var.image
   enable_online_resize = true
 }
 
