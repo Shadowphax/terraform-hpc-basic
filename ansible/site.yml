@@ -7,7 +7,7 @@
     
 - hosts: controller
   roles:
-     - geerlingguy.mysql
+    - geerlingguy.mysql
 
 - hosts: headnode
   roles:
