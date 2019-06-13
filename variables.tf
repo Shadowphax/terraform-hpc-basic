@@ -14,7 +14,7 @@ variable "pool" {
   default = "Ext_Floating_IP"
 }
 variable "worker_instance_count" {
-  default = "2"
+  default = "1"
 }
 variable "beegfs_instance_count" {
   default = "2"
