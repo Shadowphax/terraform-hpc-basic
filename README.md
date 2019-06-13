@@ -29,7 +29,7 @@ unzip <filename_which_you_downloaded>
 `terraform init`</br>
 
 4. Download the ansible roles.</br>
-`git submodule update --init --recursive`
+`ansible-galaxy install -r requirements.yml`
 
 5. Execute the `plan` to verify the creation of infrastructure. </br>
 `terraform plan -out plan.out`</br>
