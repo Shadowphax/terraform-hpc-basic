@@ -42,6 +42,26 @@ resource "openstack_networking_secgroup_rule_v2" "icmp" {
   security_group_id = openstack_networking_secgroup_v2.infra_sec_group.id
 }
 
+resource "openstack_networking_secgroup_rule_v2" "AllPortsforBeeGFStcp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  port_range_min    = 8000
+  port_range_max    = 8300
+  protocol          = "tcp"
+  remote_ip_prefix  = openstack_networking_subnet_v2.private_subnet.cidr
+  security_group_id = openstack_networking_secgroup_v2.infra_sec_group.id
+}
+
+resource "openstack_networking_secgroup_rule_v2" "AllPortsforBeeGFSudp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  port_range_min    = 8000
+  port_range_max    = 8300
+  protocol          = "udp"
+  remote_ip_prefix  = openstack_networking_subnet_v2.private_subnet.cidr
+  security_group_id = openstack_networking_secgroup_v2.infra_sec_group.id
+}
+
 //Networking Section 
 
 resource "openstack_networking_network_v2" "private_net" {
