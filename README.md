@@ -1,6 +1,7 @@
 # Deployment of a basic HPC Cluster on the iLifu OpenStack Research Cloud using Terraform and Ansible
-![alt text](https://github.com/shadowphax/terraform-hpc-basic/images/slurm.png 
-![alt text](https://github.com/shadowphax/terraform-hpc-basic/images/beegfs.png
+<img src="images/slurm.png" width="100" height="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="images/beegfs.png" width="150" height="100">
+
 ## Goal
 
 The goal is to provide researchers with a zero-touch provisioned HPC cluster and parallel BeeGFS storage attached. The environment scales both slurm worker nodes and BeeGFS storage nodes without any downtime required. The deployment is not limited to the iLifu Cloud but is limited to only run on OpenStack environments.</br>
