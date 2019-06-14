@@ -19,7 +19,7 @@
   - cluster_beegfs_mgmt
   - cluster_beegfs_mds
   - cluster_beegfs_oss
-  - cluster_beegfs_client 
+  - cluster_beegfs_client
   roles:
   - role: ansible-role-beegfs
     beegfs_enable:
@@ -38,7 +38,7 @@
       port: 8203
     beegfs_mgmt_host: "{{ groups['cluster_beegfs_mgmt'] | first }}"
     beegfs_client:
-    - path: "/mnt/beegfs"
+    - path: "/beegfs"
       port: 8004
     beegfs_fstype: "xfs"
     beegfs_force_format: false
