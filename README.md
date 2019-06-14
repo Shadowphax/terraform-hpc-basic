@@ -11,6 +11,11 @@ The intended use-case is for researchers who require short-term compute capacity
 ## Nota Bene
 
 This is a completely separate enviroment and has no bearing on the existing BeeGFS storage attached to the iLifu Cloud. </br>
+</br>
+There are few caveats which I will work on when I have a moment. They include the following: </br>
+* Ubuntu 18.04 only. Other OS distributions will be considered.
+* BeeGFS block storage allocation per server. Refer to ```main.tf```. 
+* Stack monitoring with InfluxDB and Telegraph. 
 
 ## Installation
 
