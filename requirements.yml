@@ -1,2 +1,10 @@
 # Ansible Roles from Galaxy 
+<<<<<<< HEAD
 - src: geerlingguy.ntp
+=======
+- src: geerlingguy.ntp
+- src: geerlingguy.mysql
+
+# Github Roles 
+- src: https://github.com/stackhpc/ansible-role-beegfs
+>>>>>>> add-beegfs

@@ -1,23 +1,36 @@
-# Basic deployment of a SLURM HPC on OpenStack using Terraform
+# Deployment of a basic HPC Cluster on the iLifu OpenStack Research Cloud using Terraform and Ansible
+<img src="images/slurm.png" width="100" height="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="images/beegfs.png" width="150" height="100">
 
-This repository is meant to provide an environment with which researchers can conduct the following work:
-* Instantiate a set of compute nodes running SLURM
-* Jupyter Hub and associated spawners to execute jobs on SLURM
+## Goal
 
-## Installation
+The goal is to provide researchers with a zero-touch provisioned HPC cluster and parallel BeeGFS storage attached. The environment scales both slurm worker nodes and BeeGFS storage nodes without any downtime required. The deployment is not limited to the iLifu Cloud but is limited to only run on OpenStack environments.</br>
+</br>
+The intended use-case is for researchers who require short-term compute capacity and storage capabilities to quickly deploy a cluster on the iLifu OpenStack Research Cloud. </br>
 
-Download the Terraform compress file from [Terraform.io](https://terraform.io) to create the environment.
+## Nota Bene
 
-```bash
-unzip <filename_which_you_downloaded>
-```
+This is a completely separate enviroment and has no bearing on the existing BeeGFS storage attached to the iLifu Cloud. </br>
+</br>
+There are few caveats which I will work on when I have a moment. They include the following: </br>
+* Ubuntu 18.04 only. Other OS distributions will be considered.
+* BeeGFS block storage allocation per server. Refer to ```main.tf```. 
+* Stack monitoring with InfluxDB and Telegraph. 
+
+## Requirements
+
+[Terraform v0.12](https://terraform.io)</br>
+[Ansible Engine v2.8](https://ansible.com)
+
 
 ## Infrastructure Deployed
+ - Slurm Headnode
  - Slurm Controller
- - Slurm Headnode 
- - Worker Nodes ( The count variable defined in variables.tf)
+ - Slurm Worker Nodes
+ - BeeGFS Storage
 
-## Usage:
+
+## Usage
 
 1. Clone the respository </br>
 `git clone https://github.com/Shadowphax/terraform-hpc-basic.git `
@@ -39,16 +52,14 @@ unzip <filename_which_you_downloaded>
 
 ## Adding additional Ansible Roles
 
-I split the location of ansible roles into two locations. The first location is a role path ```internal-role``` which is relevant internally, example: ```common``` plays. The other is relevent to external roles - ```galaxy-roles```.The role update paths are located in the ansible.cfg. </br>
-</br>
-Adding more ansible roles is simply finding the role on git and executing - ```git submodule add <url> <path_to_role_and_module_name>```</br>
-For example: ```git submodule add https://github.com/geerlingguy/ansible-role-nfs.git ansible/galaxy-roles/geerlingguy.nfs``` - it gets added to the .gitmodule file and this file you can check into your own fork of this project. Please do not submit PR's for the addition of roles as this project is meant to be kept miminalistic and simple.
+1. Update the requirements.yml file in order to add ansible roles.
+2. Execute `ansible-galaxy install -r requirements.yml` for installation.</br>
 
 ## Openstack Credentials
-Source credentials from your RC file downloadable from within OpenStack Dashboard. 
+Source credentials from your RC file downloadable from within OpenStack Dashboard.
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, not for Ansible roles. Please open an issue first to discuss what you would like to change.
 
 ## License
 

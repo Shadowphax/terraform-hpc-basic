@@ -3,8 +3,15 @@
 
 - name: Update package cache 
   apt: 
-    update_cache: yes 
- 
+    update_cache: yes
+
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python3-pymysql
+
 # Appending hosts to the /etc/hosts file.
 - name: update host file 
   lineinfile:
