@@ -1,6 +1,3 @@
 geerlingguy.ntp
-<<<<<<< HEAD
-=======
 geerlingguy.mysql
 ansible-role-beegfs
->>>>>>> add-beegfs
