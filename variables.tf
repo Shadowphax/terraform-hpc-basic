@@ -15,7 +15,10 @@ variable "pool" {
 }
 variable "worker_instance_count" {
   default = "1"
-
+}
+variable "beegfs_instance_count" {
+  default = "2"
+}
 variable "beegfs_storage_vol_count" {
   default = "3"
 }
