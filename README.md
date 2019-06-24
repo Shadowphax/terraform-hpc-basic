@@ -17,13 +17,11 @@ There are few caveats which I will work on when I have a moment. They include th
 * BeeGFS block storage allocation per server. Refer to ```main.tf```. 
 * Stack monitoring with InfluxDB and Telegraph. 
 
-## Installation
+## Requirements
 
-Download the Terraform compress file from [Terraform.io](https://terraform.io) to create the environment.
+[Terraform v0.12](https://terraform.io)</br>
+[Ansible Engine v2.8](https://ansible.com)
 
-```bash
-unzip <filename_which_you_downloaded>
-```
 
 ## Infrastructure Deployed
  - Slurm Headnode
