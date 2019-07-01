@@ -10,11 +10,26 @@
     - geerlingguy.mysql
 
 - hosts: headnode
-  roles:
+  roles: 
 
 - hosts: workernodes
   roles:
 
+# SLURM - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-openhpc
+- hosts:
+  - slurm_login
+  - slurm_controller
+  - slurm_compute
+  become: yes
+  roles:
+    - role: shadowphax-slurm
+      slurm_enable:
+        slurm_controller: "{{ inventory_hostname in groups['controller'] }}"
+        slurm_login: "{{ inventory_hostname in groups['headnode'] }}"
+        slurm_compute: "{{ inventory_hostname in groups['workernodes'] }}"
+        runtime: true
+
+# BeeGFS - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-beegfs
 - hosts:
   - cluster_beegfs_mgmt
   - cluster_beegfs_mds
