@@ -69,6 +69,6 @@ resource "local_file" "ansible_inventory" {
               openstack_compute_instance_v2.beegfs_storage_2.*.name,
               openstack_compute_instance_v2.beegfs_storage_2.*.access_ip_v4
             )
-            )}\n\n[follower:vars]\nansible_user=${var.ssh_user_name}\n\n[cluster:children]\nleader\nfollower\n\n[cluster_beegfs_mgmt:children]\nleader\n\n[cluster_beegfs_mds:children]\nleader\n\n[cluster_beegfs_oss:children]\nleader\nfollower\n\n[cluster_beegfs_client:children]\nleader\nfollower\nworkernodes\nheadnode\n\n"            
+            )}\n\n[follower:vars]\nansible_user=${var.ssh_user_name}\n\n[cluster:children]\nleader\nfollower\n\n[cluster_beegfs_mgmt:children]\nleader\n\n[cluster_beegfs_mds:children]\nleader\n\n[cluster_beegfs_oss:children]\nleader\nfollower\n\n[cluster_beegfs_client:children]\nleader\nfollower\nworkernodes\nheadnode\n\n[slurm-controller:children]\ncontroller\n\n[slurm-compute:children]\nworkernodes\n\n[slurm-headnode:children]\nheadnode\n\n"            
   filename = "./inventory/slurm-inventory"
 }
