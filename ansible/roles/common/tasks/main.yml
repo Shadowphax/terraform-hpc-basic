@@ -12,6 +12,12 @@
     packages:
     - python3-pymysql
 
+- name: Inserting alias for python 
+  lineinfile:
+    path: ~/.bashrc
+    line: alias python='python3'
+    insertafter: alias.*
+
 # Appending hosts to the /etc/hosts file.
 - name: update host file 
   lineinfile:
