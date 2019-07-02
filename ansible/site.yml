@@ -17,9 +17,9 @@
 
 # SLURM - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-openhpc
 - hosts:
-  - slurm_login
-  - slurm_controller
-  - slurm_compute
+  - controller
+  - headnode
+  - workernodes
   become: yes
   roles:
     - role: ansible-role-slurm
