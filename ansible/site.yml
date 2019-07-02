@@ -15,19 +15,6 @@
 - hosts: workernodes
   roles:
 
-# SLURM - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-openhpc
-- hosts:
-  - controller
-  - headnode
-  - workernodes
-  become: yes
-  roles:
-    - role: ansible-role-slurm
-      slurm_enable:
-        controller: "{{ inventory_hostname in groups['controller'] }}"
-        headnode: "{{ inventory_hostname in groups['headnode'] }}"
-        compute: "{{ inventory_hostname in groups['workernodes'] }}"
-
 # BeeGFS - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-beegfs
 - hosts:
   - cluster_beegfs_mgmt
@@ -60,4 +47,15 @@
     beegfs_rdma: false
     beegfs_state: present
     
-    
+# SLURM - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-openhpc
+- hosts:
+  - controller
+  - headnode
+  - workernodes
+  become: yes
+  roles:
+    - role: ansible-role-slurm
+      slurm_enable:
+        controller: "{{ inventory_hostname in groups['controller'] }}"
+        headnode: "{{ inventory_hostname in groups['headnode'] }}"
+        compute: "{{ inventory_hostname in groups['workernodes'] }}"    
