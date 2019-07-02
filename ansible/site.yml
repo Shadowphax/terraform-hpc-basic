@@ -22,12 +22,11 @@
   - slurm_compute
   become: yes
   roles:
-    - role: shadowphax-slurm
+    - role: ansible-role-slurm
       slurm_enable:
-        slurm_controller: "{{ inventory_hostname in groups['controller'] }}"
-        slurm_login: "{{ inventory_hostname in groups['headnode'] }}"
-        slurm_compute: "{{ inventory_hostname in groups['workernodes'] }}"
-        runtime: true
+        controller: "{{ inventory_hostname in groups['controller'] }}"
+        headnode: "{{ inventory_hostname in groups['headnode'] }}"
+        compute: "{{ inventory_hostname in groups['workernodes'] }}"
 
 # BeeGFS - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-beegfs
 - hosts:
