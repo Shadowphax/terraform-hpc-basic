@@ -15,7 +15,7 @@
 - hosts: workernodes
   roles:
 
-# BeeGFS - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-beegfs
+# BeeGFS - Role from StackHPC - https://github.com/stackhpc/ansible-role-beegfs
 - hosts:
   - cluster_beegfs_mgmt
   - cluster_beegfs_mds
@@ -47,7 +47,7 @@
     beegfs_rdma: false
     beegfs_state: present
     
-# SLURM - Role layout of StackHPC - https://github.com/stackhpc/ansible-role-openhpc
+# SLURM - Inspiration for role layout from StackHPC - https://github.com/stackhpc/ansible-role-openhpc
 - hosts:
   - controller
   - headnode
