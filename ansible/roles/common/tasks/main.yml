@@ -1,9 +1,10 @@
 ---
-# tasks file for common
+# Tasks file for common tasks across all systems. 
 
 - name: Update package cache 
   apt: 
     update_cache: yes
+    cache_valid_time: 3600
 
 - name: Install a list of packages
   apt:
@@ -18,6 +19,11 @@
     dest: "/usr/bin/python"
     state: link
 
+# Task to apply Ubuntu Application/Security ipdates
+- name: Apply the latest Ubuntu updates
+  apt: 
+    upgrade: yes
+    
 # Appending hosts to the /etc/hosts file.
 - name: update host file 
   lineinfile:
