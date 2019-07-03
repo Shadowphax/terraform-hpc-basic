@@ -8,6 +8,17 @@ The goal is to provide researchers with a zero-touch provisioned HPC cluster and
 </br>
 The intended use-case is for researchers who require short-term compute capacity and storage capabilities to quickly deploy a cluster on the iLifu OpenStack Research Cloud. </br>
 
+## Items which need completion
+
+[x] Terraform all the nodes </br>
+[x] Ansible provisioner for Terraform</br>
+[x] Dynamic Ansible inventory</br>
+[x] BeeGFS Storage</br>
+[ ] Slurm Ansible Role</br>
+[ ] InfluxDB, TeleGraph, PrometheusIO, Grafana (Docker?)</br>
+[ ] MinIO S3 storage (Might wanna use BeeGFS storage nodes with seperate volumes)</br>
+[ ] Get rid of the "sleep wait for servers to settle " Need a way to detect that all servers are available via ssh and continue deployment</br>
+
 ## Nota Bene
 
 This is a completely separate enviroment and has no bearing on the existing BeeGFS storage attached to the iLifu Cloud. </br>
@@ -24,7 +35,7 @@ There are few caveats which I will work on when I have a moment. They include th
 
 
 ## Infrastructure Deployed
- - Slurm Headnode
+ - Bastion node (Headnode)
  - Slurm Controller
  - Slurm Worker Nodes
  - BeeGFS Storage
