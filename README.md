@@ -6,7 +6,7 @@
 
 The goal is to provide researchers with a zero-touch provisioned HPC cluster and parallel BeeGFS storage attached. The environment scales both slurm worker nodes and BeeGFS storage nodes without any downtime required. The deployment is not limited to the iLifu Cloud but is limited to only run on OpenStack environments.</br>
 </br>
-The intended use-case is for researchers who require short-term compute capacity and storage capabilities to quickly deploy a cluster on the iLifu OpenStack Research Cloud. </br>
+The intended use-case is for researchers who require short-term compute capacity and storage capabilities to quickly deploy a cluster on the iLifu OpenStack Research Cloud. Also, while setting this up it occurred to me that as basic as I wanted this to be, it seems it might be a bit more complex but still simple for the user </br>
 
 ## Items which need completion
 
@@ -17,7 +17,8 @@ The intended use-case is for researchers who require short-term compute capacity
 [ ] Slurm Ansible Role</br>
 [ ] InfluxDB, TeleGraph, PrometheusIO, Grafana (Docker?)</br>
 [ ] MinIO S3 storage (Might wanna use BeeGFS storage nodes with seperate volumes)</br>
-[ ] Get rid of the "sleep wait for servers to settle " Need a way to detect that all servers are available via ssh and continue deployment</br>
+[ ] Golden distribution images with packer or immutable</br>
+[ ] User input for selection of distribution images and other Openstack bits and pieces </br>
 
 ## Nota Bene
 
