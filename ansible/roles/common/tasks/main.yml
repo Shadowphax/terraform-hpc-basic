@@ -12,11 +12,18 @@
   vars:
     packages:
     - python3-pymysql
+    - python3-pip
 
 - name: Create symbolic link for Python
   file:
     src: "/usr/bin/python3"
     dest: "/usr/bin/python"
+    state: link
+
+- name: Create symbolic link for Python-pip
+  file:
+    src: "/usr/bin/pip3"
+    dest: "/usr/bin/pip"
     state: link
 
   # Appending hosts to the /etc/hosts file.
