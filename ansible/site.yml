@@ -10,7 +10,7 @@
     - geerlingguy.mysql
 
 - hosts: headnode
-  roles: 
+  roles:  
 
 - hosts: workernodes
   roles:
