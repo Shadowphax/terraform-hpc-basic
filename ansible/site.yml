@@ -49,14 +49,14 @@
     beegfs_state: present
     
 # SLURM - Inspiration for role layout from StackHPC - https://github.com/stackhpc/ansible-role-openhpc
-#- hosts:
-#  - controller
-#  - headnode
-#  - workernodes
-#  become: yes
-#  roles:
-#    - role: ansible-role-slurm
-#      slurm_enable:
-#        controller: "{{ inventory_hostname in groups['controller'] }}"
-#        headnode: "{{ inventory_hostname in groups['headnode'] }}"
-#        compute: "{{ inventory_hostname in groups['workernodes'] }}"    
+- hosts:
+  - controller
+  - headnode
+  - workernodes
+  become: yes
+  roles:
+    - role: ansible-role-slurm
+      slurm_enable:
+        controller: "{{ inventory_hostname in groups['controller'] }}"
+        headnode: "{{ inventory_hostname in groups['headnode'] }}"
+        compute: "{{ inventory_hostname in groups['workernodes'] }}"    
