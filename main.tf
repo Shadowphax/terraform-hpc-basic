@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12.0"
+  required_version = ">= 0.12"
 }
 
 resource "openstack_compute_keypair_v2" "authkeys" {
@@ -116,7 +116,7 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
 // Slurm Headnode 
 resource "openstack_compute_instance_v2" "slurm_headnode" {
   name            = "slurm-headnode"
-  image_name      = var.image
+  image_id        = data.openstack_images_image_v2.Ubuntu18.id
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
   security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
@@ -138,7 +138,7 @@ resource "openstack_compute_instance_v2" "slurm_headnode" {
 resource "openstack_compute_instance_v2" "slurm_workers" {
   name            = "slurm-wrk-${count.index + 1}"
   count           = var.worker_instance_count
-  image_name      = var.image
+  image_id        = data.openstack_images_image_v2.Ubuntu18.id
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
   security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
@@ -151,7 +151,7 @@ resource "openstack_compute_instance_v2" "slurm_workers" {
 // Slurm Controller Node
 resource "openstack_compute_instance_v2" "slurm_controller" {
   name            = "slurm-controller"
-  image_name      = var.image
+  image_id        = data.openstack_images_image_v2.Ubuntu18.id
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
   security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
@@ -173,7 +173,7 @@ resource "openstack_compute_instance_v2" "slurm_controller" {
 
 resource "openstack_compute_instance_v2" "beegfs_storage_1" {
   name            = "bgfs-1"
-  image_name      = var.image
+  image_id        = data.openstack_images_image_v2.Ubuntu18.id
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
   security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
@@ -185,7 +185,7 @@ resource "openstack_compute_instance_v2" "beegfs_storage_1" {
 
 resource "openstack_compute_instance_v2" "beegfs_storage_2" {
   name            = "bgfs-2"
-  image_name      = var.image
+  image_id        = data.openstack_images_image_v2.Ubuntu18.id
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.authkeys.name
   security_groups = [openstack_networking_secgroup_v2.infra_sec_group.name]
