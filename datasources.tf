@@ -2,6 +2,11 @@ data "openstack_networking_network_v2" "private_net" {
   name = var.pool
 }
 
+data "openstack_images_image_v2" "Ubuntu18" {
+  name ="Ubuntu-Bionic-18.04-amd64"
+  most_recent = true
+}
+
 /*
 This datasource is required for the <<resource "local_file" "ansible_inventory>> 
 to populate the Floating IP"
