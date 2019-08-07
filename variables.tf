@@ -1,6 +1,3 @@
-variable "image" {
-  default = "Packer-Ubuntu-18.04"
-}
 variable "flavor" {
   default = "m1.medium"
 }
