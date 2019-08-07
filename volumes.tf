@@ -3,7 +3,7 @@
 resource "openstack_blockstorage_volume_v3" "slurm_boot" {
   name        = "Slurm_boot"
   description = "Slurm Headnode Boot Volume"
-  size        = 5
+  size        = 40
   image_id    = data.openstack_images_image_v2.Ubuntu18.id
   enable_online_resize = true
 }
@@ -13,7 +13,7 @@ resource "openstack_blockstorage_volume_v3" "slurm_boot" {
 resource "openstack_blockstorage_volume_v3" "slurm_ctl_boot" {
   name        = "Slurm_ctl_boot"
   description = "Slurm Controller Boot Volume"
-  size        = 5
+  size        = 40
   image_id    = data.openstack_images_image_v2.Ubuntu18.id
   enable_online_resize = true
 }
