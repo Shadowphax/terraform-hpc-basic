@@ -101,7 +101,8 @@ resource "openstack_compute_floatingip_associate_v2" "headnode_floating_ip" {
       "echo 'Beginning the provisioner exec....'",
       "sudo DEBIAN_FRONTEND=noninteractive apt-get -y update",
       "sudo DEBIAN_FRONTEND=noninteractive apt-get -y update",
-      "sudo DEBIAN_FRONTEND=noninteractive apt-get -y install python3-pip wget unzip",
+      "sudo DEBIAN_FRONTEND=noninteractive apt-get -y install python3 python3-pip wget unzip",
+      "sudo ln -s /usr/bin/python3 /usr/bin/python "
       "sudo pip3 -q install ansible",
     ]
     connection {
