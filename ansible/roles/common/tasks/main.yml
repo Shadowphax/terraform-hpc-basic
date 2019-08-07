@@ -6,15 +6,6 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Install a list of packages
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - python3-pymysql
-    - python3-pip
-    - python3-minimal 
-
 - name: Create symbolic link for Python
   file:
     src: "/usr/bin/python3"
