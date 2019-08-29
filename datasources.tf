@@ -3,7 +3,7 @@ data "openstack_networking_network_v2" "private_net" {
 }
 
 data "openstack_images_image_v2" "Ubuntu18" {
-  name ="Packer-Ubuntu-18.04"
+  name ="Packer-Ubuntu-1804"
   most_recent = true
 }
 
